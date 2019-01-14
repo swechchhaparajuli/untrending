@@ -27,7 +27,8 @@ module.exports = app => {
       console.log('Sending articles by category...');
       console.log('req.param', req.params);
       const resArr = [];
-      if (req.params) {
+      if (Object.keys(req.params).length > 4) {
+        console.log('In if statement')
         if (req.params.business === 'true') {
           newsapi.v2
             .topHeadlines({
@@ -118,8 +119,9 @@ module.exports = app => {
             });
         }
         console.log('final resArr', resArr);
-        res.json({ data: resArr });
+        res.json({ resArr });
       } else {
+        console.log('In else statement')
         res.json({ article: null });
       }
     }
