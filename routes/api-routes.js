@@ -26,9 +26,10 @@ module.exports = app => {
     (req, res) => {
       console.log('Sending articles by category...');
       console.log('req.param', req.params);
-      const resArr = [];
-      if (Object.keys(req.params).length > 4) {
+      if (Object.keys(req.params).length === 6) {
         console.log('In if statement')
+        const promiseOne = new Promise((resolve, reject) => {
+          const resArr = [];
         if (req.params.business === 'true') {
           newsapi.v2
             .topHeadlines({
@@ -118,11 +119,15 @@ module.exports = app => {
               resArr.push(response.articles);
             });
         }
+        resolve(resArr);
+      })
+      promiseOne.then(resArr => {
         console.log('final resArr', resArr);
         res.json({ resArr });
+      })
       } else {
         console.log('In else statement')
-        res.json({ article: null });
+        res.json({ categories: null });
       }
     }
   );

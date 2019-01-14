@@ -43,6 +43,7 @@ const categoriesCall = cat => {
       cat.science
     }/${cat.sports}/${cat.technology}`
   ).then(data => {
+    console.log(data)
     displayArticles(data);
   });
 };
