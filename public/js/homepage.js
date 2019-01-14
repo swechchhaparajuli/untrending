@@ -6,11 +6,6 @@ $(document).ready(() => {
   $.get('/api/user').then(data => {
     const $header = $('#btn-insert');
     if (data) {
-      console.log(data);
-      // Below is our user object
-      console.log(data.user);
-      // Below is our categories object for the above user
-      console.log('categories object', data.categories);
       const $logout = $('<a>');
       $logout.attr('class', 'navbar-brand');
       $logout.attr('id', 'logout-button');
@@ -25,7 +20,6 @@ $(document).ready(() => {
       $header.append($userInfo);
       categoriesCall(data.categories);
     } else {
-      console.log('User not logged in');
       const $signin = $('<a>');
       $signin.attr('class', 'navbar-brand');
       $signin.attr('id', 'signin-button');
@@ -49,7 +43,6 @@ const categoriesCall = cat => {
       cat.science
     }/${cat.sports}/${cat.technology}`
   ).then(data => {
-    console.log(data)
     displayArticles(data);
   });
 };
@@ -76,7 +69,6 @@ const displayArticles = articles => {
       let subtitle = article[i].description;
       let date = article[i].publishedAt;
       let blurb = article[i].content.split('[+')[0];
-      console.log(blurb);
       let artUrl = article[i].url;
       let thumbnail = article[i].urlToImage;
 
